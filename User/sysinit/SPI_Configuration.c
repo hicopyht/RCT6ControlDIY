@@ -9,7 +9,6 @@
 **************************************************************************************/
 void SPI2_Configuration(void)
 {
-	SPI_InitTypeDef  SPI_InitStructure;
 	GPIO_InitTypeDef GPIO_InitStructure;
 
 	/* Enable SPI2 */

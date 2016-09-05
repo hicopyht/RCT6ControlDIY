@@ -30,10 +30,10 @@
 .\obj\nvic_configuration.o: ..\User\sysinit\SPI_Configuration.h
 .\obj\nvic_configuration.o: ..\User\sysinit\TIM_Configuration.h
 .\obj\nvic_configuration.o: ..\User\sysinit\I2C_Configuration.h
-.\obj\nvic_configuration.o: ..\Other_Device_Driver\I2C1_IMU.h
 .\obj\nvic_configuration.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 .\obj\nvic_configuration.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 .\obj\nvic_configuration.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+.\obj\nvic_configuration.o: ..\Other_Device_Driver\MPU6000.h
 .\obj\nvic_configuration.o: ..\User\parameter.h
 .\obj\nvic_configuration.o: ..\User\Function.h
 .\obj\nvic_configuration.o: ..\User\var.h

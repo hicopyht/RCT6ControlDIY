@@ -21,7 +21,8 @@ extern float battery_voltage;
 
 /*计时变量*/
 extern u32 Time;
-extern u32 sec;
+extern u32 Second;
+extern bool time_locked;
 /*精确延时函数的辅助变量*/
 extern u32 TimingDelay;  			//延时时间
 
@@ -37,6 +38,7 @@ extern U16 inPWM1 ;		//inPWM1  脉宽数据
 extern U16 inPWM2 ;		//inPWM2  脉宽数据
 extern U16 inPWM3 ;		//inPWM3  脉宽数据
 extern U16 inPWM4 ;		//inPWM4  脉宽数据
+//
 
 #endif
 

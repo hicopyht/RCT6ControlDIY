@@ -18,6 +18,7 @@ U8 outBaseBuf( U8* byte );
 void calBaseBuf(void);
 void SendEncoders( U16 left, U16 right);
 void SendEncodersAndGyro( U16 left, U16 right, S16 gyro );
+void SendEncodersAndMpu6000(U16 left, U16 right, S16 gx, S16 gy, S16 gz, S16 ax, S16 ay, S16 az);
 void SendBatteryState( U16 voltage_adc );
 void SendBreakerStatus( U8 b0, U8 b1);
 void SendParam( float value );

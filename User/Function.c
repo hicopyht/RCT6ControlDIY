@@ -1,11 +1,5 @@
 #include "Configuration.h"
 
-double getTimeStamp(void)
-{
-	u16 nsec =  getSystemTickValue() /9;
-	return (sec + (double)(Time + nsec / 1000.0)  / 1000.0);
-}
-
 void delayus( vu32 count )
 {
 	vu32 i = 0;

@@ -9,14 +9,8 @@
 **************************************************************************************/
 void EXTI0_IRQHandler(void)
 {
-	// Read encoder and gyroscope measurement
-	/*
-	encoder_stamp = getTimeStamp();
-	encoder_left_value = readEncoderL();
-	encoder_right_value = readEncoderR();
-	Read_ITG3205_Z();
-	gyro_update = TRUE;
-	*/
+	// Read encoder and mpu6000 measurement
+	MPU6000_ReadResult();
 	//Çå³ýEXTI Line0¹ÒÆðÎ»
 	EXTI_ClearITPendingBit(EXTI_Line0);
 

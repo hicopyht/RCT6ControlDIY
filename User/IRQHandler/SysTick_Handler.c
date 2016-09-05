@@ -17,7 +17,7 @@ void SysTick_Handler(void)
 	if(Time >= 1000)
 	{
 	 	Time = 0;
-		sec ++;
+		Second ++;
 	}
 
 	if( Time % controller_cycle == 7 )

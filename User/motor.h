@@ -52,7 +52,7 @@ struct SPEED_DATA
 	float velocity_min;
 	float velocity_deadzone;
 	double timeout;
-	double stamp;
+	struct TIME_STAMP stamp;
 };
 
 struct MOTOR_DATA

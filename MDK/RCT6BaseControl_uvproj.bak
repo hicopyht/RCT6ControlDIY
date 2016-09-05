@@ -502,11 +502,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\sysinit\I2C_Configuration.c</FilePath>
             </File>
-            <File>
-              <FileName>SPI_Configuration.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\sysinit\SPI_Configuration.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -551,9 +546,9 @@
           <GroupName>Other_Device_Driver</GroupName>
           <Files>
             <File>
-              <FileName>MPU9250.c</FileName>
+              <FileName>I2C1_IMU.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Other_Device_Driver\MPU9250.c</FilePath>
+              <FilePath>..\Other_Device_Driver\I2C1_IMU.c</FilePath>
             </File>
           </Files>
         </Group>

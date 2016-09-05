@@ -30,10 +30,10 @@
 .\obj\systick_handler.o: ..\User\sysinit\SPI_Configuration.h
 .\obj\systick_handler.o: ..\User\sysinit\TIM_Configuration.h
 .\obj\systick_handler.o: ..\User\sysinit\I2C_Configuration.h
-.\obj\systick_handler.o: ..\Other_Device_Driver\I2C1_IMU.h
 .\obj\systick_handler.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 .\obj\systick_handler.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 .\obj\systick_handler.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+.\obj\systick_handler.o: ..\Other_Device_Driver\MPU6000.h
 .\obj\systick_handler.o: ..\User\parameter.h
 .\obj\systick_handler.o: ..\User\Function.h
 .\obj\systick_handler.o: ..\User\var.h

@@ -8,7 +8,8 @@ float battery_voltage = 0;
 
 /*计时变量*/
 u32 Time = 0;
-u32 sec = 0;
+u32 Second = 0;
+bool time_locked = FALSE;
 /*精确延时函数的辅助变量*/
 u32 TimingDelay = 0;  			//延时时间
 

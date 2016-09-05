@@ -15,7 +15,7 @@ void EXTI_Configuration(void)
 	
 
 	// PA0, KEY interrupt, in NVIC
-	// ITG3205 INT, active low
+	// MPU6000 INT, active low
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);

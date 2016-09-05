@@ -29,7 +29,14 @@ typedef double V3[3];
 #ifndef _Configuration_H
 #define _Configuration_H
 
-#define PI	3.1415927
+#define PI			3.14159265358979323846
+#define M_G 			9.80f
+#define M_PI_2		1.570796
+#define M_2_PI_1 	6.28318530717958647692
+
+#define TO_RAD(x)	(x * 0.01745329252)  // *pi/180
+#define TO_DEG(x)	(x * 57.2957795131)  // *180/pi
+
 #define SYSTEM_RESET	(SCB->AIRCR = 0x05FA0000 | (u32)0x04)		//÷ÿ∆Ù
 
 #define CONFIG_DEBUG
@@ -49,11 +56,12 @@ typedef double V3[3];
 #include "TIM_Configuration.h"
 #include "I2C_Configuration.h"
 
-#include "I2C1_IMU.h"
 
 #include "stdio.h"
 #include "math.h"
 #include "string.h"
+
+#include "MPU6000.h"
 
 #include "parameter.h"
 #include "Function.h"

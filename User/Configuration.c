@@ -21,8 +21,7 @@ void InitDevice(void)
 	TIM4_Configuration();	// TIM4, Encoder B
 	TIM3_Configuration();	// TIM3, PWM for Motors
 	//
-	I2C2_Init();
-	Init_ITG3205();
+	SPI2_Configuration();	// SPI2, for MPU6000
 	//
 	Motor_Init();
 	SysTick_Configuration();	// System tick

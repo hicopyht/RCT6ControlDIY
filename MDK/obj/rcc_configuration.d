@@ -30,10 +30,10 @@
 .\obj\rcc_configuration.o: ..\User\sysinit\SPI_Configuration.h
 .\obj\rcc_configuration.o: ..\User\sysinit\TIM_Configuration.h
 .\obj\rcc_configuration.o: ..\User\sysinit\I2C_Configuration.h
-.\obj\rcc_configuration.o: ..\Other_Device_Driver\I2C1_IMU.h
 .\obj\rcc_configuration.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 .\obj\rcc_configuration.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 .\obj\rcc_configuration.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+.\obj\rcc_configuration.o: ..\Other_Device_Driver\MPU6000.h
 .\obj\rcc_configuration.o: ..\User\parameter.h
 .\obj\rcc_configuration.o: ..\User\Function.h
 .\obj\rcc_configuration.o: ..\User\var.h

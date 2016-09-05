@@ -30,3 +30,61 @@ void  SysTick_Configuration(void)
 #endif
 
 }
+
+void getTimeStamp( struct TIME_STAMP * stamp)
+{
+	u16 us =  getSystemTickValue() /9;
+	stamp->usec = Time * 1000 + us;
+	stamp->sec = Second;
+}
+
+// cur >= pre
+void deltaTimeStamp( struct TIME_STAMP* cur, struct TIME_STAMP* pre, struct TIME_STAMP* delta)
+{
+	delta->sec = cur->sec - pre->sec;
+	if( cur->usec < pre->usec )
+	{
+		delta->usec = 1000000 + cur->usec - pre->usec;
+		delta->sec --;
+	}
+	else
+	{
+		delta->usec = cur->usec - pre->usec;
+	}
+}
+
+double deltaTimeStampDouble( struct TIME_STAMP* cur, struct TIME_STAMP* pre )
+{
+	U32 sec, usec;
+	sec = cur->sec - pre->sec;
+	if( cur->usec < pre->usec )
+	{
+		usec = 1000000 + cur->usec - pre->usec;
+		sec --;
+	}
+	else
+	{
+		usec = cur->usec - pre->usec;
+	}
+
+	return (double) (sec + usec /1000000.0);
+}
+
+float deltaTimeStampFloat( struct TIME_STAMP* cur, struct TIME_STAMP* pre )
+{
+	U32 sec, usec;
+	sec = cur->sec - pre->sec;
+	if( cur->usec < pre->usec )
+	{
+		usec = 1000000 + cur->usec - pre->usec;
+		sec --;
+	}
+	else
+	{
+		usec = cur->usec - pre->usec;
+	}
+
+	return (float) (sec + usec /1000000.0);
+}
+
+

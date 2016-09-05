@@ -66,7 +66,8 @@ void MotorData_Init(void)
 	VelocityBuff.velocity_max = VELOCITY_MAX;
 	VelocityBuff.velocity_min = VELOCITY_MIN;
 	VelocityBuff.velocity_deadzone = VELOCITY_DEADZONE;
-	VelocityBuff.stamp = 0;
+	VelocityBuff.stamp.sec = 0;
+	VelocityBuff.stamp.usec = 0;
 	VelocityBuff.timeout = MOTOR_CMD_TIMEOUT;
 
 	initPid( &(VelocityPid[MOTOR_LEFT].pid), VELOCITY_PID_P_GAIN, VELOCITY_PID_I_GAIN, VELOCITY_PID_D_GAIN, VELOCITY_PID_CLAMP_GAIN, -VELOCITY_PID_CLAMP_GAIN);
@@ -104,31 +105,28 @@ void MotorData_Init(void)
  ********************************************************************************/
 void Motor_Control(void)
 {
-	static double stamp_last = 0;
-	double stamp;
+	static struct TIME_STAMP stamp_last;
+	struct TIME_STAMP stamp;
 	float dt;
 
 	// Reading Data
 	//stamp = encoder_stamp;
 	//VelocityPid[MOTOR_LEFT].encoder= encoder_left_value;
 	//VelocityPid[MOTOR_RIGHT].encoder = encoder_left_value;
-	stamp = getTimeStamp();;
+	getTimeStamp( &stamp );;
 	VelocityPid[MOTOR_LEFT].encoder= readEncoderL();
 	VelocityPid[MOTOR_RIGHT].encoder = readEncoderR();
-
-	// Read gyro measurement
-	Read_ITG3205_Z();
 
 	// Send encoders and gyroscope measurement
 	SendEncodersAndGyro( VelocityPid[MOTOR_LEFT].encoder, VelocityPid[MOTOR_RIGHT].encoder, gyro_raw.z );
 
 	// Delta time
-	dt =  stamp - stamp_last;
+	dt =  deltaTimeStampFloat(&stamp, &stamp_last);;
 	VelocityPid[MOTOR_RIGHT].dt = VelocityPid[MOTOR_LEFT].dt = dt;
-	stamp_last = stamp;
+	copyTimeStamp( stamp, stamp_last );
 
 	// Set speed from buffer
-	if( stamp - VelocityBuff.stamp > VelocityBuff.timeout )
+	if( deltaTimeStampDouble( &stamp, &(VelocityBuff.stamp)) > VelocityBuff.timeout )
 	{
 		VelocityPid[MOTOR_LEFT].velocity_value = 0;
 		VelocityPid[MOTOR_RIGHT].velocity_value = 0;
@@ -210,8 +208,8 @@ void calSpeed( struct MOTOR_DATA* motor )
 
 void outputSpeed(void)
 {
-	static S16 pwm_left = 0;
-	static S16 pwm_right = 0;
+	//static S16 pwm_left = 0;
+	//static S16 pwm_right = 0;
 
 	// LEFT
 	if( MOTOR[MOTOR_LEFT].speed_value > MOTOR[MOTOR_LEFT].speed_deadzone)		// FORWARD

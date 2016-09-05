@@ -8,7 +8,7 @@
 void USART1_IRQHandler(void)  
 {
 	U8 t = 0;    	
-	static U8 FLen = 10;
+//	static U8 FLen = 10;
 
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 	{
@@ -436,6 +436,52 @@ void SendEncodersAndGyro( U16 left, U16 right, S16 gyro )
 
 }
 
+// 21 bytes, # E C LH LL RH RL GXH GXL GYH GYL GZH GZL AXH AXL AYH AYL AZH AZL SUM \n
+void SendEncodersAndMpu6000(U16 left, U16 right, S16 gx, S16 gy, S16 gz, S16 ax, S16 ay, S16 az)
+{
+	U8 i=0;
+	U8 TempU8=0; 
+
+	tU1SendBuf[0] =  '#';
+	tU1SendBuf[1] =  'E';
+	tU1SendBuf[2] = 'C';
+	tU1SendBuf[3] = (left  >> 8) & 0xFF;
+	tU1SendBuf[4] = left & 0xFF;
+	tU1SendBuf[5] = (right  >> 8) & 0xFF;
+	tU1SendBuf[6] = right & 0xFF;
+	tU1SendBuf[7] = (gx  >> 8) & 0xFF;
+	tU1SendBuf[8] = gx & 0xFF;
+	tU1SendBuf[9] = (gy  >> 8) & 0xFF;
+	tU1SendBuf[10] = gy & 0xFF;
+	tU1SendBuf[11] = (gz  >> 8) & 0xFF;
+	tU1SendBuf[12] = gz & 0xFF;
+	tU1SendBuf[13] = (ax  >> 8) & 0xFF;
+	tU1SendBuf[14] = ax & 0xFF;
+	tU1SendBuf[15] = (ay  >> 8) & 0xFF;
+	tU1SendBuf[16] = ay & 0xFF;
+	tU1SendBuf[17] = (az  >> 8) & 0xFF;
+	tU1SendBuf[18] = az & 0xFF;
+	tU1SendBuf[19] = 0;
+	tU1SendBuf[20] = '\n';
+	
+
+	for(i=0;i<19;i++)
+		TempU8 += tU1SendBuf[i]; 
+	tU1SendBuf[19] = TempU8;
+	
+	//桢长度 Chk+1 
+	for(i=0;i<21;i++)			
+	{
+		U1SendBuf[U1SendBufPi] = tU1SendBuf[i];
+		U1SendBufPi = (U1SendBufPi +1)%USART1_BUF;  //输出指针移位 
+	}	
+	if(IsU1TxEmpty == 1)
+	{
+		DMA1_Channel4_IRQHandler();	
+	}		
+
+}
+
 
 
 // 9 bytes, # B S b0 b1 b2 b3 SUM \n
@@ -593,7 +639,7 @@ U8 calBaseCmd(void)
 		// Read speed
 		VelocityBuff.velocity_left = bytes4ToFloat( BaseRecBuf[3], BaseRecBuf[4], BaseRecBuf[5], BaseRecBuf[6] );
 		VelocityBuff.velocity_right = bytes4ToFloat( BaseRecBuf[7], BaseRecBuf[8], BaseRecBuf[9], BaseRecBuf[10] );
-		VelocityBuff.stamp = getTimeStamp();
+		getTimeStamp( &(VelocityBuff.stamp) );
 
 		// Limit max
 		if( VelocityBuff.velocity_left > VelocityBuff.velocity_max )

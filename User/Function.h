@@ -4,7 +4,6 @@ typedef union{
 	U8 bytes[4];
 } FLOAT4;
 
-double getTimeStamp(void);
 void delayus( vu32 count );
 void delayms(vu32 nCount);
 void delayms2(u32 nTime);

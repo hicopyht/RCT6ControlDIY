@@ -30,10 +30,10 @@
 .\obj\usart2_irqhandler.o: ..\User\sysinit\SPI_Configuration.h
 .\obj\usart2_irqhandler.o: ..\User\sysinit\TIM_Configuration.h
 .\obj\usart2_irqhandler.o: ..\User\sysinit\I2C_Configuration.h
-.\obj\usart2_irqhandler.o: ..\Other_Device_Driver\I2C1_IMU.h
 .\obj\usart2_irqhandler.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 .\obj\usart2_irqhandler.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 .\obj\usart2_irqhandler.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+.\obj\usart2_irqhandler.o: ..\Other_Device_Driver\MPU6000.h
 .\obj\usart2_irqhandler.o: ..\User\parameter.h
 .\obj\usart2_irqhandler.o: ..\User\Function.h
 .\obj\usart2_irqhandler.o: ..\User\var.h

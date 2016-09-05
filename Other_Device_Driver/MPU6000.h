@@ -53,17 +53,46 @@
 // Read/Write operation
 #define MPU_WRITE_REG	0x00
 #define MPU_READ_REG	0x80
-#define MPU_SPI_RW(x)	SPI1_SendByte(x)
+#define MPU_SPI_RW(x)	SPI2_SendByte(x)
 #define MPU6000_REG_RESULT_FIRST	0x3B
+//
+#define MPU_Selected() 	SPI2_Selected()
+#define MPU_Deselected() SPI2_Deselected()
+//
+struct IMU_PARAMS{
+	float range_scale;
+	float x_offset;
+	float y_offset;
+	float z_offset;
+	float x_scale;
+	float y_scale;
+	float z_scale;
+};
+
+struct IMU_RAW{
+	S16 x;
+	S16 y;
+	S16 z;
+	struct TIME_STAMP stamp;
+};
+
+struct IMU_FILTERED{
+	float x;
+	float y;
+	float z;
+	struct TIME_STAMP stamp;
+};
 
 
 extern U8 mpu_buffer[14];
 extern U8 mpu_temperature[2];
 //
-#define MPU_FIFO_LEN	700
+#define MPU_FIFO_LEN	10
 //
-extern struct IMU_DATA_FILTERED gyro_filtered;
-extern struct IMU_DATA_FILTERED acc_filtered;
+extern struct IMU_RAW gyro_raw;
+extern struct IMU_RAW accel_raw;
+extern struct IMU_FILTERED gyro_filtered;
+extern struct IMU_FILTERED accel_filtered;
 //
 //
 extern U8 Is_RecordIMUData;
@@ -75,8 +104,8 @@ U8 MPU6000_ReadReg(U8 reg);
 void MPU6000_WriteBuffer(U8 reg, U8*buffer, U8 num);
 void MPU6000_ReadBuffer(U8 reg, U8*buffer, U8 num);
 //
-void InMpuFiFo(struct IMU_DATA_RAW gin, struct IMU_DATA_RAW ain);
-U8 OutMpuFiFo(struct IMU_DATA_RAW *gout, struct IMU_DATA_RAW *aout);
+void InMpuFiFo(struct IMU_RAW gin, struct IMU_RAW ain);
+U8 OutMpuFiFo(struct IMU_RAW *gout, struct IMU_RAW *aout);
 U16 GetMpuFiFoSize(void);
 void ClearMpuFiFo(void);
 U8 IsMpuFiFoEmpty(void);
