@@ -1,0 +1,76 @@
+STM32F103RCT6£º
+PA0		WAKUP_KEY
+PA1		LED1
+PA2		UART2_TX
+PA3		UART2_RX
+PA4		LED2
+PA5		
+PA6		
+PA7		
+PA8
+PA9		UART1_TX
+PA10	UART1_RX
+PA11	USBDM
+PA12	USBDP
+PA13	SWDIO
+PA14	SWDCLK
+PA15	Encoder A TIM2 CH1
+
+PB0		
+PB1		L3GD20 INT
+PB2		
+PB3		Encoder A TIM2 CH2
+PB4		Motor A PWM, TIM3 CH1
+PB5		Motor B PWM, TIM3 CH2
+PB6		Encoder B TIM4 CH1
+PB7		Encoder B TIM4 CH2
+PB8		
+PB9		
+PB10	UART3_TX/I2C2 SCL
+PB11	UART3_RX/I2C2 SDA
+PB12	SPI2 NSS, software
+PB13	SPI2 SCK
+PB14	SPI2 MISO
+PB15	SPI2 MOSI
+
+PC0		ADC0					
+PC1		ADC1					
+PC2		Motor A IN1
+PC3		Motor A IN2
+PC4		Motor B IN1
+PC5		Motor B IN2
+PC6		TIM8 Capture1
+PC7		TIM8 Capture2		
+
+PC8		TIM8 Capture3
+PC9		TIM8 Capture4
+PC10	
+PC11	
+PC12	
+PC13	TAMPER_KEY
+
+PD2		M_STB
+
+
+
+/*************************************************************************/
+Peripheral:
+2 Motors, controlled by 2 PWM (TIM5), 4 Pin
+2 Endorders, using TIM2 and TIM4
+
+Gyroscope: L3GD20, SPI2
+
+UART1,UART2
+UART3/I2C2
+
+1 USB
+2 CAN
+
+1 ADC input
+
+SWD
+BOOT
+RESET
+Power System
+LED
+/*************************************************************************/

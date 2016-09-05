@@ -1,0 +1,17 @@
+usart2_irqhandler.o: ..\User\IRQHandler\USART2_IRQHandler.c
+usart2_irqhandler.o: ..\User\Configuration.h
+usart2_irqhandler.o: ..\CM3\stm32f10x.h
+usart2_irqhandler.o: ..\CM3\core_cm3.h
+usart2_irqhandler.o: C:\Keil\ARM\RV31\INC\stdint.h
+usart2_irqhandler.o: ..\CM3\system_stm32f10x.h
+usart2_irqhandler.o: ..\User\sysinit\RCC_Configuration.h
+usart2_irqhandler.o: ..\User\sysinit\NVIC_Configuration.h
+usart2_irqhandler.o: ..\User\sysinit\SysTick_Configuration.h
+usart2_irqhandler.o: ..\User\sysinit\GPIO_Configuration.h
+usart2_irqhandler.o: ..\User\sysinit\USART_Configuration.h
+usart2_irqhandler.o: ..\User\sysinit\DMA_Configuration.h
+usart2_irqhandler.o: C:\Keil\ARM\RV31\INC\stdio.h
+usart2_irqhandler.o: C:\Keil\ARM\RV31\INC\math.h
+usart2_irqhandler.o: C:\Keil\ARM\RV31\INC\string.h
+usart2_irqhandler.o: ..\User\Function.h
+usart2_irqhandler.o: ..\User\var.h

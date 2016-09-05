@@ -1,0 +1,46 @@
+*** Creating Trace Output File 'RCT6Template.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '"configuration.o"'
+### List of Objects: adding '"main.o"'
+### List of Objects: adding '"var.o"'
+### List of Objects: adding '"function.o"'
+### List of Objects: adding '"rcc_configuration.o"'
+### List of Objects: adding '"dma_configuration.o"'
+### List of Objects: adding '"gpio_configuration.o"'
+### List of Objects: adding '"nvic_configuration.o"'
+### List of Objects: adding '"systick_configuration.o"'
+### List of Objects: adding '"usart_configuration.o"'
+### List of Objects: adding '"exti_configuration.o"'
+### List of Objects: adding '"spi1_configuration.o"'
+### List of Objects: adding '"dma_irqhandler.o"'
+### List of Objects: adding '"systick_handler.o"'
+### List of Objects: adding '"usart1_irqhandler.o"'
+### List of Objects: adding '"exti_irqhandler.o"'
+### List of Objects: adding '"nrf24l01.o"'
+### List of Objects: adding '"misc.o"'
+### List of Objects: adding '"stm32f10x_dma.o"'
+### List of Objects: adding '"stm32f10x_flash.o"'
+### List of Objects: adding '"stm32f10x_gpio.o"'
+### List of Objects: adding '"stm32f10x_rcc.o"'
+### List of Objects: adding '"stm32f10x_usart.o"'
+### List of Objects: adding '"stm32f10x_exti.o"'
+### List of Objects: adding '"stm32f10x_spi.o"'
+### List of Objects: adding '".\startup_stm32f10x_hd.o"'
+### List of Objects: adding '"core_cm3.o"'
+### List of Objects: adding '"system_stm32f10x.o"'
+### ADS-LD Command completed:
+--device DARMSTM "configuration.o" "main.o" "var.o" "function.o" "rcc_configuration.o" "dma_configuration.o" "gpio_configuration.o" "nvic_configuration.o" "systick_configuration.o" "usart_configuration.o" "exti_configuration.o" "spi1_configuration.o" "dma_irqhandler.o" "systick_handler.o" "usart1_irqhandler.o" "exti_irqhandler.o" "nrf24l01.o" "misc.o" "stm32f10x_dma.o" "stm32f10x_flash.o" "stm32f10x_gpio.o" "stm32f10x_rcc.o" "stm32f10x_usart.o" "stm32f10x_exti.o" "stm32f10x_spi.o" ".\startup_stm32f10x_hd.o" "core_cm3.o" "system_stm32f10x.o" --library_type=microlib --strict --scatter "RCT6Template.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\RCT6Template.map" -o "RCT6Template.axf"### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: 'RCT6Template.axf'
+### ADS-LD Command File: 'RCT6Template.lnp'
+### Checking for dirty Components...
+### Creating CmdFile 'RCT6Template.lnp', Handle=0x0000060C
+### Writing '.lnp' file
+### ADS-LD Command file 'RCT6Template.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 0 errors
+### Updating obj list
+### LDADS_file() completed.

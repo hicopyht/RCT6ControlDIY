@@ -1,0 +1,156 @@
+
+/************************************************
+**函数名:TestLCDS
+**功能:用户测试小LCD的函数
+**注意事项:开始的时候,LCD显示全屏填充横线,然后就显示测试成功的英文字符.这里使用了显示ASC码的函数,字体大小为8*6,
+************************************************/
+void TestLCDS(void)
+{
+	u8 i,j,tmp;
+	char string1[] = "DX32 example SPILCD,This is Lcd 128*64 dot!";
+	u32 k;
+	LcdInit();
+	/*
+	for(j=0;j<5;j++)
+	{
+		tmp=1;
+		for(i=0;i<8;i++)
+		{
+			LcdFill(tmp);
+			for(k=0;k<600000;k++);	
+			tmp<<=1;
+			tmp+=1;
+		}
+	}
+	*/
+	
+	LcdFill(0);
+
+	LcdSetXP(0,0);
+	LcdChar8('D');
+	LcdChar8('X');
+	LcdChar8('S');
+	LcdChar8('T');
+	LcdChar8('M');
+	LcdChar8('3');
+	LcdChar8('2');
+
+	LcdSetXP(0,1);
+	LcdChar8('T');
+	LcdChar8('E');
+	LcdChar8('S');
+	LcdChar8('T');
+	LcdChar8(' ');
+	LcdChar8('O');
+	LcdChar8('K');
+	LcdChar8('!');
+
+	LcdString(0,4,string1);
+
+}
+
+X+ = 3758
+X- = 412
+Y+ = 3758
+Y- = 412
+
+X_M = 2085
+Y_M = 2085
+
+
+		USART1_SendData(0x11);
+		USART1_SendData(t);
+		if(t == 0xF1)
+		{
+
+			M_BREAK_ON;
+			printf("\r\n M_B_ON");
+			U1Printf();
+		}
+
+		if(t == 0xF2)
+		{
+			M_BREAK_OFF;
+			printf("\r\n M_B_OFF");
+			U1Printf();
+		}
+
+		if(t == 0xE0)
+		{
+			IsCalHandle = FALSE;
+			IsCalSpeed = FALSE;
+		}
+		else if(t == 0xE1)
+		{
+			IsCalHandle = TRUE;
+			printf("\r\n CalHandle");
+			U1Printf();
+			
+		}
+		else if(t == 0xE2)
+		{
+			printf("\r\n CalSpeed");
+			U1Printf();
+			IsCalSpeed = TRUE;
+		}
+
+
+//分离按键
+/*
+Turn_Lock(2);
+Turn_Lock(2);
+Delay2(800);
+Turn_Lock(0);
+LINER_KEY[TURN_LINER].act = LINER_ACT_DOWN;
+LINER_KEY[TURN_LINER].update = TRUE;
+printf("\r\n Chair Turn Right");
+U1Printf(); */
+
+
+EEPROM TEST
+/*
+	U16 i;
+	U8 Wdata[256] = {0};
+	U8 Rdata[256] = {0};
+
+	printf("\r\n Test EEPROM ...");
+	U1Printf();
+	for(i = 0; i < 256; i++)
+	{
+		Wdata[i] = i;
+	}
+	I2C_EE_SetHWAddr(EEPROM_Block0_ADDRESS);	//256byte per block
+	I2C_EE_BufferWrite(Wdata, 0, 256);
+
+	I2C_EE_BufferRead(Rdata, 0, 256);
+	for(i = 0; i < 256; i++)
+	{
+		if(i % 10 == 0)
+			printf("\r\n");
+		printf("%4d", Rdata[i]);
+		U1Printf();
+	}
+*/
+
+
+//分离
+	/*if(is_rf_docking_out)
+	{
+		if(rf_docking_out_delay )
+		{
+			speedl = -speed_max;
+			speedr = -speed_max;
+		}
+		else
+		{
+			is_rf_docking_out = FALSE;
+		}
+	}*/
+
+	脚板位置拉线传感器:
+	Low limit:		1370
+	Turn limit:	1450 (由于机构刚度，取1460)
+	Up limit:		1767
+	
+
+

@@ -1,0 +1,1 @@
+-c --device DARMSTM -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\API -I..\CM3 -I..\Other_Device_Driver -I..\STM32F10x_StdPeriph_Driver\inc -I..\User\sysinit -I..\User -I "C:\Keil\ARM\INC\ST\STM32F10x" -o "usart2_irqhandler.o" --omf_browse "usart2_irqhandler.crf" --depend "usart2_irqhandler.d" "..\User\IRQHandler\USART2_IRQHandler.c"
