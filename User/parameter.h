@@ -23,12 +23,13 @@ struct ParamData
 	ParamValue value;
 };
 
-#define PARAM_NUM	14
+#define PARAM_NUM	18
 extern const char * param_names[PARAM_NUM];
 extern const float default_values[PARAM_NUM] ;
 extern struct ParamData param_vector[PARAM_NUM];
 
 void paramsInit(void);
+void paramsRefresh(void);
 void paramsInfoPrint(void);
 void paramsLoad(void);
 void paramsSave(void);

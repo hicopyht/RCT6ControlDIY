@@ -131,6 +131,23 @@ U8 UART2_CAL(void)
 						tU2SendBuf[D1] = 0xAA;
 						InU2SendBuf();
 						break;
+				case	'D':
+				case	'd':
+						if( DLen < 2)
+							break;
+						if( U2RecBuf[D0] == 'M' || U2RecBuf[D0] == 'm' )
+						{
+							debug_motor = (bool)U2RecBuf[D1];
+							printf("Debug motor = %d\r\n", debug_motor );
+							DebugPrintfDMA();
+						}
+						else if( U2RecBuf[D0] == 'U' || U2RecBuf[D0] == 'u' )
+						{
+							debug_uart = (bool)U2RecBuf[D1];
+							printf("Debug uart = %d\r\n", debug_uart );
+							DebugPrintfDMA();
+						}
+						break;
 
 				case	'P':	// 0x50
 				case	'p':	// D0 as command id, D1 as parameter index
@@ -169,6 +186,12 @@ U8 UART2_CAL(void)
 						else if( U2RecBuf[D0] == 'P' || U2RecBuf[D0] == 'p' )	// 0x50, print parameters names
 						{
 							paramsInfoPrint();
+						}
+						else if( U2RecBuf[D0] == 'F' || U2RecBuf[D0] == 'f' )	// refresh parameters
+						{
+							paramsRefresh();
+							printf("Refresh params to system variables, size = %d.\r\n", PARAM_NUM );
+							DebugPrintfDMA();
 						}
 						else if( U2RecBuf[D0] == 'R' || U2RecBuf[D0] == 'r' )		// 0x52, reset parameters to default
 						{

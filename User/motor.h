@@ -23,20 +23,22 @@
 #define MOTOR_PWM_MAX		300	//(900 - MIN_MOTOR_SPEED)
 #define MOTOR_PWM_MIN		(-300)
 #define MOTOR_PWM_DEADZONE	20
-#define MOTOR_ACCELERATION		7
-#define MOTOR_DECELERATION		7
+#define MOTOR_PWM_ACCEL		7
+#define MOTOR_PWM_DECEL		7
 //电机控制参数	
 #define MOTOR_CONTROL_CYCLE	20
-#define MOTOR_CMD_TIMEOUT		500
-//
-#define VELOCITY_PID_P_GAIN		(20.0)
-#define VELOCITY_PID_I_GAIN		(0.0)
-#define VELOCITY_PID_D_GAIN		(0.0)
-#define VELOCITY_PID_CLAMP_GAIN	(10.0)
+#define MOTOR_CMD_TIMEOUT		(0.5)
 //
 #define VELOCITY_MAX		(19.8)
 #define VELOCITY_MIN		(-19.8)
-#define VELOCITY_DEADZONE	(0.1)
+#define VELOCITY_DEADZONE	(0.2)
+#define VELOCITY_ACCEL	(0.5)
+#define VELOCITY_DECEL	(0.5)
+//
+#define VELOCITY_PID_P_GAIN		(1.6)
+#define VELOCITY_PID_I_GAIN		(0.2)
+#define VELOCITY_PID_D_GAIN		(0.6)
+#define VELOCITY_PID_CLAMP_GAIN	(20.0)
 //
 #define ENCODER_READ_CYCLE		20
 #define ENCODER_PULSES				3120
@@ -46,25 +48,29 @@
 
 struct SPEED_DATA
 {
-	float velocity_left;
-	float velocity_right;
-	float velocity_max;
-	float velocity_min;
-	float velocity_deadzone;
-	double timeout;
+	float left_value;	// current
+	float right_value;
+	float left_buff;	// target
+	float right_buff;
+	float max;
+	float min;
+	float deadzone;
+	float accel;
+	float decel;
+	float timeout;
 	struct TIME_STAMP stamp;
 };
 
 struct MOTOR_DATA
 {
-	S16	speed_value;//当前速度值
-	S16 speed_buff;	//给定速度值
-	S16 pwm_value;	//控制电机输出PWM脉宽值,有符号
+	S16	pwm_value;//当前速度值
+	S16 pwm_buff;	//给定速度值
 	S16 acceleration;//加速度
 	S16 deceleration;//减速度
-	S16 speed_min;//最小速度
-	S16 speed_max;//最大速度
-	S16 speed_deadzone;
+	S16 pwm_min;//最小速度
+	S16 pwm_max;//最大速度
+	S16 pwm_deadzone;
+	S16 pwm_real_output;
 	U8 is_output;
 };			
 
@@ -73,6 +79,7 @@ struct VELOCITY_PID
 	float velocity_value;
 	float velocity_feed;
 	S16 pwm_output;
+	S16 pwm_deadzone;
 	U16 encoder;
 	U16 encoder_last;
 	float dt;
@@ -84,6 +91,7 @@ extern U8 controller_cycle;
 extern U8 is_control_motor;
 extern struct PidGain PidBuff;
 extern struct SPEED_DATA VelocityBuff;
+extern struct SPEED_DATA Velocity;
 extern struct MOTOR_DATA MOTOR[MOTOR_NUM];//电机加速度控制结构体
 extern struct VELOCITY_PID VelocityPid[MOTOR_NUM];
 // Encoder Reading
@@ -96,7 +104,8 @@ extern double encoder_stamp;
 void Motor_Init(void);
 void MotorData_Init(void);
 void Motor_Control(void);
-void setSpeed( struct MOTOR_DATA* motor, S16 speed );
+void calVelocity( struct SPEED_DATA * velocity );
+void setSpeed( struct MOTOR_DATA* motor, S16 pwm );
 void calSpeed( struct MOTOR_DATA* motor );
 void outputSpeed(void);
 S16 computeEncoderDelta( U16 encoder, U16 encoder_last );

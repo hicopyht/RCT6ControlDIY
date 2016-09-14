@@ -22,6 +22,7 @@ void InitDevice(void)
 	TIM3_Configuration();	// TIM3, PWM for Motors
 	//
 	SPI2_Configuration();	// SPI2, for MPU6000
+	MPU6000_Init();
 	//
 	Motor_Init();
 	SysTick_Configuration();	// System tick

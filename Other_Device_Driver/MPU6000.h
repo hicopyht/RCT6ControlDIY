@@ -95,9 +95,11 @@ extern struct IMU_FILTERED gyro_filtered;
 extern struct IMU_FILTERED accel_filtered;
 //
 //
+extern bool is_imu_update;
 extern U8 Is_RecordIMUData;
 
 void MPU6000_Init(void);
+void MPU6000_ReadOnlyGZ(void);
 void MPU6000_ReadResult(void);
 void MPU6000_WriteReg(U8 reg, U8 byte);
 U8 MPU6000_ReadReg(U8 reg);

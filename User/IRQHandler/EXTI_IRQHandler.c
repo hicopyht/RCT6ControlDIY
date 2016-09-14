@@ -10,7 +10,7 @@
 void EXTI0_IRQHandler(void)
 {
 	// Read encoder and mpu6000 measurement
-	MPU6000_ReadResult();
+	MPU6000_ReadOnlyGZ();
 	//Çå³ýEXTI Line0¹ÒÆðÎ»
 	EXTI_ClearITPendingBit(EXTI_Line0);
 

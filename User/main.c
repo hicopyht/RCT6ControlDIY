@@ -14,11 +14,11 @@ main()
 	while(1)
 	{
 
-		// Process gyroscope and encoder measurement
-		if( is_control_motor == TRUE )
+		// Process gyroscope z-axis and encoder measurement
+		if( is_imu_update == TRUE )
 		{
 			Motor_Control();
-			is_control_motor = FALSE;
+			is_imu_update = FALSE;
 		}
 	
 		if(ADC1_2_OK == TRUE)	//ADC1_2 采样结果更新，频率50Hz

@@ -20,8 +20,8 @@ void SysTick_Handler(void)
 		Second ++;
 	}
 
-	if( Time % controller_cycle == 7 )
-		is_control_motor = TRUE;
+	//if( Time % controller_cycle == 7 )
+	//	is_control_motor = TRUE;
 	
 
 	if(Time % 100 == 33)

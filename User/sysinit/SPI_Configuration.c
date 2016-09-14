@@ -65,7 +65,7 @@ void SPI2_HighSpeed(FunctionalState newState)
 
 	if(newState == ENABLE)
 	{
-		SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2;   //APB2时钟2分频, 36 /2 = 18MHz
+		SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;   //APB2时钟2分频, 36 /4 = 9MHz
 	}
 	
 	SPI_Init(SPI2, &SPI_InitStructure);

@@ -637,20 +637,13 @@ U8 calBaseCmd(void)
 		// Check sum ?
 
 		// Read speed
-		VelocityBuff.velocity_left = bytes4ToFloat( BaseRecBuf[3], BaseRecBuf[4], BaseRecBuf[5], BaseRecBuf[6] );
-		VelocityBuff.velocity_right = bytes4ToFloat( BaseRecBuf[7], BaseRecBuf[8], BaseRecBuf[9], BaseRecBuf[10] );
+		VelocityBuff.left_buff= bytes4ToFloat( BaseRecBuf[3], BaseRecBuf[4], BaseRecBuf[5], BaseRecBuf[6] );
+		VelocityBuff.right_buff = bytes4ToFloat( BaseRecBuf[7], BaseRecBuf[8], BaseRecBuf[9], BaseRecBuf[10] );
 		getTimeStamp( &(VelocityBuff.stamp) );
 
-		// Limit max
-		if( VelocityBuff.velocity_left > VelocityBuff.velocity_max )
-			VelocityBuff.velocity_left = VelocityBuff.velocity_max;
-		else if( VelocityBuff.velocity_left < VelocityBuff.velocity_min )
-			VelocityBuff.velocity_left = VelocityBuff.velocity_min;
-
-		if( VelocityBuff.velocity_right > VelocityBuff.velocity_max )
-			VelocityBuff.velocity_right = VelocityBuff.velocity_max;
-		else if( VelocityBuff.velocity_right < VelocityBuff.velocity_min )
-			VelocityBuff.velocity_right = VelocityBuff.velocity_min;
+		// Limit
+		limitMinMax( VelocityBuff.left_buff, VelocityBuff.min, VelocityBuff.max );
+		limitMinMax( VelocityBuff.right_buff, VelocityBuff.min, VelocityBuff.max );
 
 		// Deadzone
 		/*
@@ -660,22 +653,21 @@ U8 calBaseCmd(void)
 			VelocityBuff.velocity_right = 0;
 		*/
 
-#if defined (CONFIG_DEBUG)
-		// Print info
-		//printf(" MS %d: %f %f rad/s\n", BaseRecBufP, VelocityBuff.velocity_left, VelocityBuff.velocity_right );
-		printf(" MS = %d\r\n", Time );
-		DebugPrintfDMA();
-#endif
+		if( debug_uart )
+		{
+			// Print info
+			//printf(" MS %d: %f %f rad/s\n", BaseRecBufP, VelocityBuff.velocity_left, VelocityBuff.velocity_right );
+			printf(" MS = %d\r\n", Time );
+			DebugPrintfDMA();
+		}
 				
 	}
 	else if( BaseRecBufP == 7 && BaseRecBuf[1] == 'B' && BaseRecBuf[2] == 'K' )
 	{
 		setBreakerStatus( BaseRecBuf[3], BaseRecBuf[4] );
-#if defined (CONFIG_DEBUG)
 		// Print info
 		printf(" BK %d set %d = %d\n", Time, BaseRecBuf[3], BaseRecBuf[4] );
 		DebugPrintfDMA();
-#endif
 	}
 	else if( BaseRecBufP == 10 && BaseRecBuf[1] == 'S' && BaseRecBuf[2] == 'P' )
 	{
@@ -687,14 +679,12 @@ U8 calBaseCmd(void)
 			paramsSave();
 		}
 				
-#if defined (CONFIG_DEBUG)
 		// Print info
 		if( tempU8 < PARAM_NUM )
 		{
-			//printf(" SP %d, %s = %f\n", BaseRecBufP, param_vector[tempU8].name, tempF );
-			//DebugPrintfDMA();
+			printf(" SP %d, %s = %f\n", BaseRecBufP, param_vector[tempU8].name, tempF );
+			DebugPrintfDMA();
 		}
-#endif
 
 	}
 	else if( BaseRecBufP == 6 && BaseRecBuf[1] == 'G' && BaseRecBuf[2] == 'P' )
@@ -706,14 +696,12 @@ U8 calBaseCmd(void)
 			SendParam( tempF );
 		}
 				
-#if defined (CONFIG_DEBUG)
 		// Print info
 		if( tempU8 < PARAM_NUM )
 		{
-			//printf(" GP %d, %s = %f\n", BaseRecBufP, param_vector[tempU8].name, param_vector[tempU8].value.f );
-			//DebugPrintfDMA();
+			printf(" GP %d, %s = %f\n", BaseRecBufP, param_vector[tempU8].name, param_vector[tempU8].value.f );
+			DebugPrintfDMA();
 		}
-#endif
 
 	}
 	else if( BaseRecBufP == 9 && BaseRecBuf[1] == 'P' && BaseRecBuf[2] == 'P' )
@@ -726,11 +714,9 @@ U8 calBaseCmd(void)
 		paramWriteFloat( "velocity_pid_p", PidBuff.p_gain );
 		paramsSave();
 				
-#if defined (CONFIG_DEBUG)
 		// Print info
 		//printf(" PP %d: p = %f\n", BaseRecBufP, PidBuff.p_gain );
 		//DebugPrintfDMA();
-#endif
 
 	}
 	else if( BaseRecBufP == 9 && BaseRecBuf[1] == 'P' && BaseRecBuf[2] == 'I' )
@@ -743,11 +729,9 @@ U8 calBaseCmd(void)
 		paramWriteFloat( "velocity_pid_i", PidBuff.i_gain );
 		paramsSave();
 
-#if defined (CONFIG_DEBUG)
 		// Print info
 		printf(" PI %d: i = %f\n", BaseRecBufP, PidBuff.i_gain );
 		DebugPrintfDMA();
-#endif
 
 	}
 	else if( BaseRecBufP == 9 && BaseRecBuf[1] == 'P' && BaseRecBuf[2] == 'D' )
@@ -760,11 +744,8 @@ U8 calBaseCmd(void)
 		paramWriteFloat( "velocity_pid_d", PidBuff.d_gain );
 		paramsSave();
 				
-#if defined (CONFIG_DEBUG)
-		// Print info
 		printf(" PD %d: d = %f\n", BaseRecBufP, PidBuff.d_gain );
 		DebugPrintfDMA();
-#endif
 
 	}
 	else if( BaseRecBufP == 9 && BaseRecBuf[1] == 'P' && BaseRecBuf[2] == 'C' )
@@ -778,11 +759,9 @@ U8 calBaseCmd(void)
 		paramWriteFloat( "velocity_pid_clamp", PidBuff.i_max );
 		paramsSave();
 				
-#if defined (CONFIG_DEBUG)
 		// Print info
 		printf(" PC %d: i_max = %f, i_min = %f \n", BaseRecBufP, PidBuff.i_max, PidBuff.i_min );
 		DebugPrintfDMA();
-#endif
 
 	}
 

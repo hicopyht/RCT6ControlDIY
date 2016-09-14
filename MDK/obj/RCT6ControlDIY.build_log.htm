@@ -8,25 +8,16 @@ Project File Date:  09/05/2016
 
 <h2>Output:</h2>
 Build target 'Target 1'
-compiling motor.c...
-compiling USART1_IRQHandler.c...
-compiling MPU6000.c...
+compiling var.c...
+compiling USART2_IRQHandler.c...
 linking...
-Program Size: Code=23548 RO-data=636 RW-data=216 ZI-data=8560  
+Program Size: Code=26152 RO-data=772 RW-data=244 ZI-data=8636  
 FromELF: creating hex file...
 ".\obj\RCT6ControlDIY.axf" - 0 Error(s), 0 Warning(s).
 </pre>
 </body>
 </html>
-User\motor.c(211): warning:  #177-D: variable "pwm_left" was declared but never referenced
-        static S16 pwm_left = 0;
-..\User\motor.c(212): warning:  #177-D: variable "pwm_right" was declared but never referenced
-        static S16 pwm_right = 0;
-..\User\motor.c: 3 warnings, 0 errors
-compiling parameter.c...
-compiling RCC_Configuration.c...
-compiling DMA_Configuration.c...
-compiling GPIO_Configuration.c...
+.
 compiling NVIC_Configuration.c...
 compiling SysTick_Configuration.c...
 compiling USART_Configuration.c...
@@ -35,188 +26,19 @@ compiling TIM_Configuration.c...
 compiling ADC_Configuration.c...
 compiling I2C_Configuration.c...
 compiling SPI_Configuration.c...
-..\User\sysinit\SPI_Configuration.c(12): warning:  #177-D: variable "SPI_InitStructure" was declared but never referenced
-        SPI_InitTypeDef  SPI_InitStructure;
-..\User\sysinit\SPI_Configuration.c: 1 warning, 0 errors
 compiling DMA_IRQHandler.c...
 compiling SysTick_Handler.c...
 compiling USART1_IRQHandler.c...
-..\User\IRQHandler\USART1_IRQHandler.c(11): warning:  #177-D: variable "FLen" was declared but never referenced
-        static U8 FLen = 10;
-..\User\IRQHandler\USART1_IRQHandler.c: 1 warning, 0 errors
 compiling EXTI_IRQHandler.c...
 compiling TIM8_IRQHandler.c...
 compiling USART2_IRQHandler.c...
+..\User\IRQHandler\USART2_IRQHandler.c(140): warning:  #188-D: enumerated type mixed with another type
+                                                        debug_motor = U2RecBuf[D1];
+..\User\IRQHandler\USART2_IRQHandler.c(146): warning:  #188-D: enumerated type mixed with another type
+                                                        debug_uart = U2RecBuf[D1];
+..\User\IRQHandler\USART2_IRQHandler.c: 2 warnings, 0 errors
 compiling MPU6000.c...
 linking...
-Program Size: Code=23548 RO-data=636 RW-data=220 ZI-data=8556  
+Program Size: Code=26152 RO-data=772 RW-data=244 ZI-data=8636  
 FromELF: creating hex file...
-".\obj\RCT6ControlDIY.axf" - 0 Error(s), 5 Warning(s).
-e_Driver\MPU6000.c(116): error:  #268: declaration may not appear after executable statement in block
-        S16 ax, ay, az, gx, gy, gz;
-..\Other_Device_Driver\MPU6000.c(117): error:  #268: declaration may not appear after executable statement in block
-        float x, y, z;
-..\Other_Device_Driver\MPU6000.c(129): warning:  #181-D: argument is incompatible with corresponding format string conversion
-        printf("%fs, accel= %d, %d, %d, gyro = %d, %d, %d \r\n", stamp, ax, ay, az, gx, gy, gz );
-..\Other_Device_Driver\MPU6000.c: 1 warning, 2 errors
-".\obj\RCT6ControlDIY.axf" - 3 Error(s), 6 Warning(s).
-Target not created
-
-..\User\sysinit\DMA_Configuration.c: 1 warning, 0 errors
-compiling GPIO_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\GPIO_Configuration.c: 1 warning, 0 errors
-compiling NVIC_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\NVIC_Configuration.c: 1 warning, 0 errors
-compiling SysTick_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\SysTick_Configuration.c: 1 warning, 0 errors
-compiling USART_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\USART_Configuration.c: 1 warning, 0 errors
-compiling EXTI_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\EXTI_Configuration.c: 1 warning, 0 errors
-compiling TIM_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\TIM_Configuration.c: 1 warning, 0 errors
-compiling ADC_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\ADC_Configuration.c: 1 warning, 0 errors
-compiling I2C_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\I2C_Configuration.c: 1 warning, 0 errors
-compiling SPI_Configuration.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\sysinit\SPI_Configuration.c(12): warning:  #177-D: variable "SPI_InitStructure" was declared but never referenced
-        SPI_InitTypeDef  SPI_InitStructure;
-..\User\sysinit\SPI_Configuration.c: 2 warnings, 0 errors
-compiling DMA_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\IRQHandler\DMA_IRQHandler.c: 1 warning, 0 errors
-compiling SysTick_Handler.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\IRQHandler\SysTick_Handler.c: 1 warning, 0 errors
-compiling USART1_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\IRQHandler\USART1_IRQHandler.c(11): warning:  #177-D: variable "FLen" was declared but never referenced
-        static U8 FLen = 10;
-..\User\IRQHandler\USART1_IRQHandler.c(440): error:  #147-D: declaration is incompatible with "void SendEncodersAndMpu6000(U16, U16, struct IMU_RAW *, struct IMU_RAW *)" (declared at line 21 of "..\User\sysinit\USART_Configuration.h")
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel)
-..\User\IRQHandler\USART1_IRQHandler.c: 2 warnings, 1 error
-compiling EXTI_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\IRQHandler\EXTI_IRQHandler.c: 1 warning, 0 errors
-compiling TIM8_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\IRQHandler\TIM8_IRQHandler.c: 1 warning, 0 errors
-compiling USART2_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\User\IRQHandler\USART2_IRQHandler.c: 1 warning, 0 errors
-compiling MPU6000.c...
-..\User\sysinit\USART_Configuration.h(21): warning:  #231-D: declaration is not visible outside of function
-  void SendEncodersAndMpu6000(U16 left, U16 right, struct IMU_RAW *gyro, struct IMU_RAW *accel);
-..\Other_Device_Driver\MPU6000.c(128): warning:  #181-D: argument is incompatible with corresponding format string conversion
-        printf("%fs, accel= %d, %d, %d, gyro = %d, %d, %d \r\n", ax, ay, az, gx, gy, gz );
-..\Other_Device_Driver\MPU6000.c(128): warning:  #224-D: the format string requires additional arguments
-        printf("%fs, accel= %d, %d, %d, gyro = %d, %d, %d \r\n", ax, ay, az, gx, gy, gz );
-..\Other_Device_Driver\MPU6000.c: 3 warnings, 0 errors
-".\obj\RCT6ControlDIY.axf" - 1 Error(s), 30 Warning(s).
-Target not created
-mpiling stm32f10x_dma.c...
-compiling stm32f10x_flash.c...
-compiling stm32f10x_gpio.c...
-compiling stm32f10x_rcc.c...
-compiling stm32f10x_usart.c...
-compiling stm32f10x_exti.c...
-compiling stm32f10x_spi.c...
-compiling stm32f10x_tim.c...
-compiling stm32f10x_adc.c...
-compiling stm32f10x_i2c.c...
-compiling stm32f10x_bkp.c...
-compiling stm32f10x_pwr.c...
-assembling startup_stm32f10x_hd.s...
-compiling core_cm3.c...
-compiling system_stm32f10x.c...
-".\obj\RCT6ControlDIY.axf" - 1 Error(s), 30 Warning(s).
-Target not created
-*gyro, IMU_RAW *accel );
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\IRQHandler\USART1_IRQHandler.c(11): warning:  #177-D: variable "FLen" was declared but never referenced
-        static U8 FLen = 10;
-..\User\IRQHandler\USART1_IRQHandler.c(440): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel )
-..\User\IRQHandler\USART1_IRQHandler.c(440): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel )
-..\User\IRQHandler\USART1_IRQHandler.c(452): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[7] = (gyro->x  >> 8) & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(453): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[8] = gyro->x & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(454): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[9] = (gyro->y  >> 8) & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(455): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[10] = gyro->y & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(456): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[11] = (gyro->z  >> 8) & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(457): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[12] = gyro->z & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(458): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[13] = (accel->x  >> 8) & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(459): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[14] = accel->x & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(460): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[15] = (accel->y  >> 8) & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(461): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[16] = accel->y & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(462): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[17] = (accel->z  >> 8) & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c(463): error:  #132: expression must have pointer-to-struct-or-union type
-        tU1SendBuf[18] = accel->z & 0xFF;
-..\User\IRQHandler\USART1_IRQHandler.c: 1 warning, 16 errors
-compiling EXTI_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\IRQHandler\EXTI_IRQHandler.c: 0 warnings, 2 errors
-compiling TIM8_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\IRQHandler\TIM8_IRQHandler.c: 0 warnings, 2 errors
-compiling USART2_IRQHandler.c...
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\IRQHandler\USART2_IRQHandler.c: 0 warnings, 2 errors
-compiling MPU6000.c...
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\User\sysinit\USART_Configuration.h(21): error:  #20: identifier "IMU_RAW" is undefined
-  void SendEncodersAndMpu6000( U16 left, U16 right, IMU_RAW *gyro, IMU_RAW *accel );
-..\Other_Device_Driver\MPU6000.c(128): warning:  #181-D: argument is incompatible with corresponding format string conversion
-        printf("%fs, accel= %d, %d, %d, gyro = %d, %d, %d \r\n", ax, ay, az, gx, gy, gz );
-..\Other_Device_Driver\MPU6000.c(128): warning:  #224-D: the format string requires additional arguments
-        printf("%fs, accel= %d, %d, %d, gyro = %d, %d, %d \r\n", ax, ay, az, gx, gy, gz );
-..\Other_Device_Driver\MPU6000.c: 2 warnings, 2 errors
-".\obj\RCT6ControlDIY.axf" - 62 Error(s), 6 Warning(s).
-Target not created
+".\obj\RCT6ControlDIY.axf" - 0 Error(s), 2 Warning(s).

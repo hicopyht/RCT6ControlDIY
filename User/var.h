@@ -13,6 +13,9 @@
 
 #define getSystemTickValue()	(SysTick->VAL)
 
+extern bool debug_motor;
+extern bool debug_uart;
+
 //芯片内部温度
 extern u16 InternalTemp;
 //电源电压

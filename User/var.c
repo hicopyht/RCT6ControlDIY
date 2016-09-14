@@ -1,5 +1,8 @@
 #include "Configuration.h"
 
+bool debug_motor = FALSE;
+bool debug_uart = FALSE;
+
 //芯片内部温度
 u16 InternalTemp;
 //电源电压

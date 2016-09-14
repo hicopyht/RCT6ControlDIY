@@ -3,36 +3,44 @@
 
 const char * param_names[PARAM_NUM] = {
 	"save",		// 0
-	"odometry_frequency",	// 1
-	"controller_frequency",	// 2
+	"odometry_frequency",	// 1, actually being controlled by MPU6500 INT
+	"controller_frequency",	// 2, same as odometry frequency
 	"controller_timeout",	// 3
 	"pwm_max",	// 4
 	"pwm_min",	// 5
 	"pwm_deadzone",	// 6
-	"velocity_max",	// 7
-	"velocity_min",	// 8
-	"velocity_deadzone",	// 9
-	"velocity_pid_p",	// 10
-	"velocity_pid_i",	// 11
-	"velocity_pid_d",	// 12
-	"velocity_pid_clamp"	// 13
+	"pwm_acceleration",	// 7
+	"pwm_deceleration",	// 8
+	"velocity_max",	// 9
+	"velocity_min",	// 10
+	"velocity_deadzone",	// 11
+	"velocity_acceleration",	// 12
+	"velocity_deceleration",	// 13
+	"velocity_pid_p",	// 14
+	"velocity_pid_i",	// 15
+	"velocity_pid_d",	// 16
+	"velocity_pid_clamp"	// 17
 };
 
 const float default_values[PARAM_NUM] = {
-	1.0,
+	1.0,	// 1
 	50,	// 50 Hz
 	50,	// 50 Hz
 	0.5, 	// 0.5 second
 	300,
 	-300,
 	20,
+	7,
+	7,
 	19.8,	// rad/s
 	-19.8,	// rad/s
-	0.1,		// rad/s
-	5.0,
-	0.0,
-	0.0,
-	30.0
+	0.2,		// rad/s
+	0.5,
+	0.5,
+	1.6,
+	0.2,
+	0.6,
+	20.0
 };
 
 struct ParamData param_vector[PARAM_NUM];
@@ -70,6 +78,41 @@ void paramsInit(void)
 	paramsInfoPrint();
 #endif
 	
+}
+
+void paramsRefresh(void)
+{
+	// Set params from parameters server
+	VelocityBuff.deadzone = paramReadFloatWithDefault( "velocity_deadzone", VELOCITY_DEADZONE );
+	VelocityBuff.max = paramReadFloatWithDefault("velocity_max", VELOCITY_MAX);
+	VelocityBuff.min = paramReadFloatWithDefault("velocity_min", VELOCITY_MIN);
+	//
+	Velocity.deadzone = VelocityBuff.deadzone;
+	Velocity.max = VelocityBuff.max;
+	Velocity.min = VelocityBuff.min;
+	Velocity.accel = paramReadFloatWithDefault("velocity_acceleration", VELOCITY_ACCEL );
+	Velocity.decel = paramReadFloatWithDefault("velocity_deceleration", VELOCITY_DECEL );
+
+	//
+	PidBuff.p_gain = paramReadFloatWithDefault( "velocity_pid_p", VELOCITY_PID_P_GAIN );
+	PidBuff.i_gain = paramReadFloatWithDefault( "velocity_pid_i", VELOCITY_PID_I_GAIN );
+	PidBuff.d_gain = paramReadFloatWithDefault( "velocity_pid_d", VELOCITY_PID_D_GAIN );
+	PidBuff.i_max = paramReadFloatWithDefault( "velocity_pid_clamp", VELOCITY_PID_CLAMP_GAIN );
+	PidBuff.i_min = -PidBuff.i_max;
+	//
+	VelocityPid[MOTOR_LEFT].pid.gains = PidBuff;
+	VelocityPid[MOTOR_RIGHT].pid.gains = PidBuff;
+	//
+	MOTOR[MOTOR_LEFT].pwm_deadzone = paramReadFloatWithDefault( "pwm_deadzone", MOTOR_PWM_DEADZONE );
+	MOTOR[MOTOR_LEFT].pwm_max = paramReadFloatWithDefault( "pwm_max", MOTOR_PWM_MAX );
+	MOTOR[MOTOR_LEFT].pwm_min = paramReadFloatWithDefault( "pwm_min", MOTOR_PWM_MIN );
+	MOTOR[MOTOR_LEFT].acceleration = paramReadFloatWithDefault( "pwm_acceleration", MOTOR_PWM_ACCEL);
+	MOTOR[MOTOR_LEFT].deceleration = paramReadFloatWithDefault( "pwm_deceleration", MOTOR_PWM_DECEL );
+	MOTOR[MOTOR_RIGHT].pwm_deadzone =MOTOR[MOTOR_LEFT].pwm_deadzone;
+	MOTOR[MOTOR_RIGHT].pwm_max =MOTOR[MOTOR_LEFT].pwm_max;
+	MOTOR[MOTOR_RIGHT].pwm_min =MOTOR[MOTOR_LEFT].pwm_min;
+	MOTOR[MOTOR_RIGHT].acceleration =MOTOR[MOTOR_LEFT].acceleration;
+	MOTOR[MOTOR_RIGHT].deceleration =MOTOR[MOTOR_LEFT].deceleration;
 }
 
 void paramsInfoPrint(void)

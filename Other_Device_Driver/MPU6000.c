@@ -35,6 +35,7 @@ struct IMU_RAW gyro_buffer[MPU_FIFO_LEN];
 struct IMU_RAW accel_buffer[MPU_FIFO_LEN];
 
 //
+bool is_imu_update = FALSE;
 U8 Is_RecordIMUData = true;
 
 
@@ -78,10 +79,10 @@ void MPU6000_Init(void)
 	SPI2_HighSpeed(DISABLE);
 	//Delayms(100);
 		// 16bits gyroscope and acceleration
-	MPU6000_WriteReg(MPU6000_REG_PWR_MGMT_1, 0x03);	// PPL with gyroscope z clock
-	delayms(2000);
+	MPU6000_WriteReg(MPU6000_REG_PWR_MGMT_1, 0x80);	// reset device
+	delayms(10);
 	MPU6000_WriteReg(MPU6000_REG_SIGNAL_PATH_RESET, 0x07); // reset all signal path
-	delayms(2000);
+	delayms(10);
 	//MPU6000_WriteReg(MPU6000_REG_SMPLRT_DIV, 15);	// sample rate = output rate / (div + 1), 8k / (15+1) = 500Hz
 	//MPU6000_WriteReg(MPU6000_REG_SMPLRT_DIV, 39);	// sample rate = output rate / (div + 1), 8k / (39+1) = 200Hz
 	MPU6000_WriteReg(MPU6000_REG_SMPLRT_DIV, 19);	// sample rate = output rate / (div + 1), 1k / (19+1) = 50Hz
@@ -89,7 +90,7 @@ void MPU6000_Init(void)
 	//MPU6000_WriteReg(MPU6000_REG_SMPLRT_DIV, 4);	// sample rate = output rate / (div + 1), 1k / (4+1) = 200Hz
 	MPU6000_WriteReg(MPU6000_REG_CONFIG, BITS_DLPF_CFG_42HZ & BITS_DLPF_CFG_MASK);	// DLPF 42HZ, gyroscope output rate 1khz
 	//MPU6000_WriteReg(MPU6000_REG_GYRO_CONFIG, 0x18);	// +-2000 deg/sec, 16bits, -32768~32767
-	MPU6000_WriteReg(MPU6000_REG_GYRO_CONFIG, 0x08);	// +-500 deg/sec, 16bits, -32768~32767
+	MPU6000_WriteReg(MPU6000_REG_GYRO_CONFIG, 0x10);	// +-1000 deg/sec, 16bits, -32768~32767
 	MPU6000_WriteReg(MPU6000_REG_ACCEL_CONFIG, 0x08);	// +-4g, 16bits, -32768~32767
 	//
 	
@@ -106,6 +107,19 @@ void MPU6000_Init(void)
 	U1Printf();
 #endif
 
+}
+
+void MPU6000_ReadOnlyGZ(void)
+{
+	//struct TIME_STAMP stamp;
+	//getTimeStamp(&stamp);
+	MPU6000_ReadBuffer(MPU6000_REG_GYRO_ZOUT_H, mpu_buffer, 2);
+	gyro_raw.z = (S16)((mpu_buffer[0] << 8) + mpu_buffer[1]);
+	//
+	//printf("%f ms, gyro = %d\r\n", (float)(stamp.usec/1000.0), gyro_raw.z );
+	//DebugPrintfDMA();
+	//
+	is_imu_update = TRUE;
 }
 
 // Read acceleration result
@@ -176,7 +190,8 @@ void MPU6000_ReadResult(void)
 	{
 		InMpuFiFo(gyro_raw, accel_raw);
 	}
-	
+
+	is_imu_update = TRUE;
 }
 
 // Write byte

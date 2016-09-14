@@ -30,3 +30,4 @@ float bytes4ToFloat( U8 b0, U8 b1, U8 b2, U8 b3);
 #define    U16toU8(x)    (U8*)(&(x))
 #define    S16toU8(x)    (U8*)(&(x))
 
+#define limitMinMax( x, min, max) {if(x>max) x= max; if(x<min) x = min;}
